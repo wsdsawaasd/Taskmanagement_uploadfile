@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="">ADD NEW TASK</a>
+                    <a href="{{ route('tasks.create') }}">ADD NEW TASK</a>
                     <a href="{{ route('tasks.index') }}">TASKS LIST</a>
                 </div>
             </div>

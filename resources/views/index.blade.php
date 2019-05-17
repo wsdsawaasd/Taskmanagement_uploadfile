@@ -18,7 +18,9 @@
         <div class="title m-b-md">
             Tasks List
         </div>
-
+        @if(Session::has('success'))
+            <strong>{{ Session::get('success') }}</strong>
+        @endif
         @if(!isset($tasks))
             <h5 class="text-primary">Dữ liệu không tồn tại!</h5>
         @else
@@ -30,16 +32,16 @@
                     <th scope="col">Content</th>
                     <th scope="col">Created</th>
                     <th scope="col">Due Date</th>
+                    <th scope="col">image</th>
                 </tr>
                 </thead>
                 <tbody>
-                // Kiểm tra, nếu biến tasks có số lượng bằng 0 (Không có task nào) thì trả về thông báo
+
                 @if(count($tasks) == 0)
                     <tr>
                         <td colspan="5"><h5 class="text-primary">Hiện tại chưa có task nào được tạo!</h5></td>
                     </tr>
                 @else
-                    // Duyệt mảng $tasks, lấy ra từng trường của từng task để hiển thị ra bảng
                     @foreach($tasks as $key => $task)
                         <tr>
                             <td scope="row">{{ ++$key }}</td>
@@ -47,12 +49,15 @@
                             <td>{{ $task->content }}</td>
                             <td>{{ $task->created_at }}</td>
                             <td>{{ $task->updated_at}}</td>
+                            <td>
+                                <img src="{{ asset('storage/images/' . $task->image) }}" alt="" style="width: 150px">
+                            </td>
                         </tr>
                     @endforeach
                 @endif
                 </tbody>
             </table>
-            <button class="btn btn-danger offset-5" onclick="window.history.go(-1);return false">'<'Back</button>
+            <button class="btn btn-danger offset-5" onclick="window.history.go(-1);return false">< Back</button>
         @endif
 
     </div>
